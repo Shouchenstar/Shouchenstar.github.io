@@ -48,15 +48,17 @@ weight: 50    # 数字越小，标签排得越靠前
 
 之后再在文章里写 `categories: ["分类名"]` 就行。不建这个文件也能用，只是分类页没有说明文字和标签栏。
 
-## 新增一条图片（摄影 / UI 设计）
+## 新增一条图片
 
-两个图集分区都是「一张图一条目」，每条一个文件夹：
+「图片」栏目分摄影、UI 设计两个分类块，都是「一张图一条目」，每条一个文件夹：
 
 ```
-content/photography/my-photo/
+content/gallery/photography/my-photo/
   index.md     ← 标题、日期、图片名、地点
   cover.jpg    ← 图片本身
 ```
+
+UI 设计的条目放在 `content/gallery/design/` 下，格式完全一样。
 
 `index.md` 内容：
 
@@ -76,6 +78,21 @@ location: "上海"
 - `.svg` 不做缩放，直接原样输出
 - 文件夹名就是网址，用英文或数字，别用中文和空格
 - 图片版权归自己或已获授权再用；建议长边 2000px 以内、单张 500KB 左右，构建会快很多
+
+想再加一个分类块，在 `content/gallery/` 下新建文件夹和 `_index.md`：
+
+```yaml
+---
+title: "分类名"
+description: "一句话说明"
+layout: "gallery"
+weight: 30
+cascade:
+  layout: "gallery-item"
+---
+```
+
+「图片」页里就会多出一块，`weight` 越小排得越靠前。
 
 ## 本地预览
 
@@ -98,11 +115,10 @@ hugo --minify
 ```
 content/posts/        文章（Markdown）
 content/categories/   文章分类页（论文 / 游戏评价 / 灵感 / 日志）
-content/photography/  摄影图集，一条一个文件夹
-content/design/       UI 设计图集，一条一个文件夹
+content/gallery/      图片栏目：photography/ 摄影、design/ UI 设计
 content/about.md      关于页
 content/search.md     搜索页
-layouts/              图集版式（gallery.html / gallery-item.html）与分类标签短代码
+layouts/              图片版式（gallery.html / gallery-item.html）与分类标签短代码
 assets/css/extended/  图集和分类标签样式，PaperMod 会自动合并
 static/               图片、_headers 等静态文件
 themes/PaperMod/   主题源码（已内置，勿改，升级时整体替换）

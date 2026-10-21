@@ -74,6 +74,38 @@
     color: var(--secondary);
 }
 
+/* 画廊：顶层页里的分区块 */
+.gallery-block {
+    margin-top: 8px;
+}
+
+.gallery-block + .gallery-block {
+    margin-top: 44px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+}
+
+.gallery-block-title {
+    margin: 0 0 4px;
+    font-size: 1.3rem;
+    line-height: 1.4;
+}
+
+.gallery-block-title a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.gallery-block-title a:hover {
+    text-decoration: underline;
+}
+
+.gallery-block-desc {
+    margin-bottom: 4px;
+    color: var(--secondary);
+    font-size: 14px;
+}
+
 /* 画廊：详情页 */
 .gallery-full {
     display: block;

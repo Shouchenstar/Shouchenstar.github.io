@@ -1,0 +1,31 @@
+{{- /* 用法：partial "gallery-grid.html" (dict "pages" $pages) */ -}}
+<div class="gallery-grid">
+    {{- range .pages }}
+    {{- $cover := .Resources.GetMatch (.Params.image | default "cover.*") }}
+    <a class="gallery-card" href="{{ .RelPermalink }}">
+        <div class="gallery-thumb">
+            {{- if $cover }}
+                {{- if in (slice "jpeg" "jpg" "png" "webp" "gif" "tiff" "bmp") $cover.MediaType.SubType }}
+                    {{- $thumb := $cover.Resize "720x" }}
+                    <img src="{{ $thumb.RelPermalink }}" alt="{{ .Title }}"
+                        width="{{ $thumb.Width }}" height="{{ $thumb.Height }}" loading="lazy">
+                {{- else }}
+                    <img src="{{ $cover.RelPermalink }}" alt="{{ .Title }}" loading="lazy">
+                {{- end }}
+            {{- else }}
+                <div class="gallery-placeholder">{{ .Title }}</div>
+            {{- end }}
+        </div>
+        <div class="gallery-caption">
+            <span class="gallery-title">{{ .Title }}</span>
+            {{- if or .Params.location .Date }}
+            <span class="gallery-meta">
+                {{- with .Params.location }}{{ . }}{{ end }}
+                {{- if and .Params.location .Date }} · {{ end }}
+                {{- if not .Date.IsZero }}{{ .Date.Format "2006-01-02" }}{{ end }}
+            </span>
+            {{- end }}
+        </div>
+    </a>
+    {{- end }}
+</div>

@@ -7,41 +7,42 @@
     {{- end }}
 </header>
 
-{{- $pages := .Pages.ByDate.Reverse }}
-
-{{- if $pages }}
-<div class="gallery-grid">
-    {{- range $pages }}
-    {{- $cover := .Resources.GetMatch (.Params.image | default "cover.*") }}
-    <a class="gallery-card" href="{{ .RelPermalink }}">
-        <div class="gallery-thumb">
-            {{- if $cover }}
-                {{- if in (slice "jpeg" "jpg" "png" "webp" "gif" "tiff" "bmp") $cover.MediaType.SubType }}
-                    {{- $thumb := $cover.Resize "720x" }}
-                    <img src="{{ $thumb.RelPermalink }}" alt="{{ .Title }}"
-                        width="{{ $thumb.Width }}" height="{{ $thumb.Height }}" loading="lazy">
-                {{- else }}
-                    <img src="{{ $cover.RelPermalink }}" alt="{{ .Title }}" loading="lazy">
-                {{- end }}
-            {{- else }}
-                <div class="gallery-placeholder">{{ .Title }}</div>
-            {{- end }}
-        </div>
-        <div class="gallery-caption">
-            <span class="gallery-title">{{ .Title }}</span>
-            {{- if or .Params.location .Date }}
-            <span class="gallery-meta">
-                {{- with .Params.location }}{{ . }}{{ end }}
-                {{- if and .Params.location .Date }} · {{ end }}
-                {{- if not .Date.IsZero }}{{ .Date.Format "2006-01-02" }}{{ end }}
-            </span>
-            {{- end }}
-        </div>
-    </a>
-    {{- end }}
+{{- if .Content }}
+<div class="post-content md-content">
+    {{ .Content }}
 </div>
+{{- end }}
+
+{{- if .Sections }}
+
+{{- /* 顶层：每个子分区（摄影 / UI 设计）一块 */ -}}
+{{- range .Sections }}
+<section class="gallery-block">
+    <h2 class="gallery-block-title">
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+    </h2>
+    {{- with .Description }}
+    <div class="gallery-block-desc">{{ . }}</div>
+    {{- end }}
+    {{- $pages := .RegularPages.ByDate.Reverse }}
+    {{- if $pages }}
+    {{- partial "gallery-grid.html" (dict "pages" $pages) }}
+    {{- else }}
+    <p class="gallery-empty">这里还没有内容。</p>
+    {{- end }}
+</section>
+{{- end }}
+
+{{- else }}
+
+{{- /* 子分区页：直接铺网格 */ -}}
+{{- $pages := .RegularPages.ByDate.Reverse }}
+{{- if $pages }}
+{{- partial "gallery-grid.html" (dict "pages" $pages) }}
 {{- else }}
 <p class="gallery-empty">这里还没有内容。</p>
+{{- end }}
+
 {{- end }}
 
 {{- end }}

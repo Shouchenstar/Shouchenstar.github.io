@@ -1,3 +1,11 @@
-# Cloudflare Pages 专用：已删除的「灵感」图集，旧链接转到文章分类
+# Cloudflare Pages 专用：旧链接转到新位置
+
+# 已删除的「灵感」图集 → 文章分类
 /inspiration/   /categories/%E7%81%B5%E6%84%9F/   301
 /inspiration/*  /categories/%E7%81%B5%E6%84%9F/   301
+
+# 摄影 / UI 设计 合并进「图片」栏目
+/photography/   /gallery/photography/   301
+/photography/*  /gallery/photography/:splat   301
+/design/        /gallery/design/   301
+/design/*       /gallery/design/:splat   301

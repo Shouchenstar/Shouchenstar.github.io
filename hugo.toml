@@ -40,9 +40,8 @@ summaryLength = 80
 
   [params.homeInfoParams]
     Title = "Hello！"
-    Content = """
-    你好，我是一名集成电路专业学生，本博客会分享一些我觉得有意思的东西。
-"""
+    # 必须写成一行：多行字符串如果带缩进，Markdown 会把它当成代码块
+    Content = "你好，我是一名集成电路专业学生，本博客会分享一些我觉得有意思的东西。"
 
   [params.fuseOpts]
     isCaseSensitive = false
@@ -68,16 +67,10 @@ summaryLength = 80
   weight = 10
 
 [[menus.main]]
-  identifier = "photography"
-  name = "摄影"
-  url = "/photography/"
+  identifier = "gallery"
+  name = "图片"
+  url = "/gallery/"
   weight = 15
-
-[[menus.main]]
-  identifier = "design"
-  name = "UI 设计"
-  url = "/design/"
-  weight = 16
 
 [[menus.main]]
   identifier = "about"
