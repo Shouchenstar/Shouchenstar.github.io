@@ -32,15 +32,16 @@ summaryLength = 80
   ShowShareButtons = false
   ShowRssButtonInSectionTermList = true
   disableScrollToTop = false
+  mainSections = ["posts"]       # 首页只列出文章区的页面
 
   # 左上角显示的文字（只改显示，不改站点标题）
   [params.label]
     text = "首页"
 
   [params.homeInfoParams]
-    Title = "你好 👋"
+    Title = "Hello！"
     Content = """
-  你好，我是一名集成电路学生，平时会做一些课程项目和小工具。
+    你好，我是一名集成电路专业学生，本博客会分享一些我觉得有意思的东西。
 """
 
   [params.fuseOpts]
@@ -65,6 +66,24 @@ summaryLength = 80
   name = "文章"
   url = "/posts/"
   weight = 10
+
+[[menus.main]]
+  identifier = "photography"
+  name = "摄影"
+  url = "/photography/"
+  weight = 15
+
+[[menus.main]]
+  identifier = "design"
+  name = "UI 设计"
+  url = "/design/"
+  weight = 16
+
+[[menus.main]]
+  identifier = "inspiration"
+  name = "灵感"
+  url = "/inspiration/"
+  weight = 17
 
 [[menus.main]]
   identifier = "about"

@@ -24,6 +24,35 @@ summary: "一句话摘要，显示在列表里"
 ---
 ```
 
+## 新增一条图片（摄影 / UI 设计 / 灵感）
+
+三个图集分区都是「一张图一条目」，每条一个文件夹：
+
+```
+content/photography/my-photo/
+  index.md     ← 标题、日期、图片名、地点
+  cover.jpg    ← 图片本身
+```
+
+`index.md` 内容：
+
+```yaml
+---
+title: "外滩的晚上"
+date: 2026-10-21
+image: "cover.jpg"
+location: "上海"
+---
+```
+
+正文写一小段说明（拍摄时的想法、设计思路、素材来源），不写也行。
+
+- 图片放在同一文件夹里，`image` 写文件名；不写 `image` 时默认找 `cover.*`
+- 支持 `.jpg` / `.png` / `.webp`：构建时会自动生成 720px 缩略图（列表用）和 1600px 大图（详情页用），不用自己压
+- `.svg` 不做缩放，直接原样输出
+- 文件夹名就是网址，用英文或数字，别用中文和空格
+- 图片版权归自己或已获授权再用；建议长边 2000px 以内、单张 500KB 左右，构建会快很多
+
 ## 本地预览
 
 ```bash
@@ -43,10 +72,15 @@ hugo --minify
 ## 目录说明
 
 ```
-content/posts/     文章（Markdown）
-content/about.md   关于页
-content/search.md  搜索页
-static/            图片、_headers 等静态文件
+content/posts/        文章（Markdown）
+content/photography/  摄影图集，一条一个文件夹
+content/design/       UI 设计图集，一条一个文件夹
+content/inspiration/  灵感素材图集，一条一个文件夹
+content/about.md      关于页
+content/search.md     搜索页
+layouts/              图集版式（gallery.html / gallery-item.html）
+assets/css/extended/  图集样式（gallery.css），PaperMod 会自动合并
+static/               图片、_headers 等静态文件
 themes/PaperMod/   主题源码（已内置，勿改，升级时整体替换）
 hugo.toml          站点配置：站名、菜单、个人信息
 .github/workflows/ GitHub Pages 自动部署
@@ -60,7 +94,7 @@ git commit -m "post: 文章标题"
 git push
 ```
 
-推送后 GitHub Pages 和 Cloudflare Workers 会各自自动构建发布。
+推送后 GitHub Pages 和 Cloudflare Pages 会各自自动构建发布。
 
 ## 部署配置备忘
 

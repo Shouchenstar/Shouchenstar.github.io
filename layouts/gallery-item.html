@@ -1,0 +1,37 @@
+{{- define "main" }}
+
+<article class="post-single gallery-item">
+    <header class="post-header">
+        <h1 class="post-title">{{ .Title }}</h1>
+        {{- if or .Params.location .Date }}
+        <div class="post-meta">
+            {{- with .Params.location }}<span>{{ . }}</span>{{ end }}
+            {{- if and .Params.location (not .Date.IsZero) }}&nbsp;·&nbsp;{{ end }}
+            {{- if not .Date.IsZero }}<span>{{ .Date.Format "2006年1月2日" }}</span>{{ end }}
+        </div>
+        {{- end }}
+    </header>
+
+    {{- $img := .Resources.GetMatch (.Params.image | default "cover.*") }}
+    {{- with $img }}
+        {{- if in (slice "jpeg" "jpg" "png" "webp" "gif" "tiff" "bmp") .MediaType.SubType }}
+            {{- $full := .Resize "1600x" }}
+            <img class="gallery-full" src="{{ $full.RelPermalink }}" alt="{{ $.Title }}"
+                width="{{ $full.Width }}" height="{{ $full.Height }}">
+        {{- else }}
+            <img class="gallery-full" src="{{ .RelPermalink }}" alt="{{ $.Title }}">
+        {{- end }}
+    {{- end }}
+
+    {{- with .Content }}
+    <div class="post-content md-content">
+        {{ . }}
+    </div>
+    {{- end }}
+
+    <footer class="gallery-footer">
+        <a class="gallery-back" href="{{ .CurrentSection.RelPermalink }}">← 返回{{ .CurrentSection.Title }}</a>
+    </footer>
+</article>
+
+{{- end }}

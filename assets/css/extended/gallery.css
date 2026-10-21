@@ -1,0 +1,113 @@
+/* 画廊：分区列表页 */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+    margin: 24px 0;
+}
+
+.gallery-card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 8px;
+    background: var(--entry);
+    color: inherit;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.gallery-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.gallery-thumb {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--code-bg);
+}
+
+.gallery-thumb img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.35s ease;
+}
+
+.gallery-card:hover .gallery-thumb img {
+    transform: scale(1.04);
+}
+
+.gallery-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 12px;
+    color: var(--secondary);
+    font-size: 14px;
+    text-align: center;
+}
+
+.gallery-caption {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 10px 12px 12px;
+}
+
+.gallery-title {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.gallery-meta {
+    color: var(--secondary);
+    font-size: 12.5px;
+}
+
+.gallery-empty {
+    margin: 32px 0;
+    color: var(--secondary);
+}
+
+/* 画廊：详情页 */
+.gallery-full {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 8px 0 24px;
+    border-radius: 8px;
+}
+
+.gallery-footer {
+    margin-top: 32px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+}
+
+.gallery-back {
+    font-size: 14px;
+}
+
+@media (max-width: 480px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .gallery-caption {
+        padding: 8px;
+    }
+
+    .gallery-title {
+        font-size: 13.5px;
+    }
+
+    .gallery-meta {
+        font-size: 11.5px;
+    }
+}
