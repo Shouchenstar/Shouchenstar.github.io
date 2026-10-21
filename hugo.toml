@@ -18,7 +18,7 @@ summaryLength = 80
 
 [params]
   env = "production"
-  description = "潘振的个人博客 —— 学习笔记、项目实践与日常思考"
+  description = "个人博客 —— 学习笔记、项目实践与日常思考"
   author = "潘振"
   defaultTheme = "auto"          # auto / light / dark
   ShowReadingTime = true
@@ -37,11 +37,9 @@ summaryLength = 80
     text = "首页"
 
   [params.homeInfoParams]
-    Title = "你好，我是潘振 👋"
+    Title = "你好 👋"
     Content = """
-一名学生，关注 GPU 体系结构、医学图像处理与系统性能优化。
-
-这里记录学习笔记、项目实践和一些不成熟的思考。
+  你好，我是一名集成电路学生，平时会做一些课程项目和小工具。
 """
 
   [params.fuseOpts]
