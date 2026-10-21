@@ -1,0 +1,13 @@
+{
+  // Cloudflare Workers 静态站点配置
+  // 纯静态资源，不需要 main 入口文件
+  "name": "shouchenstar-github-io",
+  "compatibility_date": "2026-10-21",
+  "assets": {
+    "directory": "./public",
+    "not_found_handling": "404-page"
+  },
+  "observability": {
+    "enabled": true
+  }
+}

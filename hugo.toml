@@ -1,0 +1,76 @@
+baseURL = "https://shouchenstar.github.io/"
+locale = "zh-cn"
+defaultContentLanguage = "zh"
+title = "潘振"
+theme = "PaperMod"
+
+enableRobotsTXT = true
+enableEmoji = true
+hasCJKLanguage = true
+summaryLength = 80
+
+[pagination]
+  pagerSize = 10
+
+# 让首页生成 JSON，供站内搜索使用
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+[params]
+  env = "production"
+  description = "潘振的个人博客 —— 学习笔记、项目实践与日常思考"
+  author = "潘振"
+  defaultTheme = "auto"          # auto / light / dark
+  ShowReadingTime = true
+  ShowWordCount = true
+  ShowCodeCopyButtons = true
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowToc = true                 # 文章右侧自动生成目录
+  TocOpen = false
+  ShowShareButtons = false
+  ShowRssButtonInSectionTermList = true
+  disableScrollToTop = false
+
+  [params.homeInfoParams]
+    Title = "你好，我是潘振 👋"
+    Content = """
+一名学生，关注 GPU 体系结构、医学图像处理与系统性能优化。
+
+这里记录学习笔记、项目实践和一些不成熟的思考。
+"""
+
+  [params.fuseOpts]
+    isCaseSensitive = false
+    shouldSort = true
+    location = 0
+    distance = 1000
+    threshold = 0.4
+    minMatchCharLength = 1
+    limit = 10
+    keys = ["title", "permalink", "summary", "content"]
+
+  [[params.socialIcons]]
+    name = "github"
+    url = "https://github.com/Shouchenstar"
+  [[params.socialIcons]]
+    name = "rss"
+    url = "index.xml"
+
+[[menus.main]]
+  identifier = "posts"
+  name = "文章"
+  url = "/posts/"
+  weight = 10
+
+[[menus.main]]
+  identifier = "about"
+  name = "关于"
+  url = "/about/"
+  weight = 20
+
+[[menus.main]]
+  identifier = "search"
+  name = "搜索"
+  url = "/search/"
+  weight = 30
