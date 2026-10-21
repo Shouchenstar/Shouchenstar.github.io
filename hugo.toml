@@ -1,7 +1,7 @@
 baseURL = "https://shouchenstar-github-io.pages.dev/"
 locale = "zh-cn"
 defaultContentLanguage = "zh"
-title = "潘振"
+title = "Shouchenstar"
 theme = "PaperMod"
 
 enableRobotsTXT = true
@@ -19,7 +19,8 @@ summaryLength = 80
 [params]
   env = "production"
   description = "个人博客 —— 学习笔记、项目实践与日常思考"
-  author = "潘振"
+  author = "Shouchenstar"
+  hideAuthor = true              # 文章元信息行不显示作者名（仍保留在 RSS / SEO 中）
   defaultTheme = "auto"          # auto / light / dark
   ShowReadingTime = true
   ShowWordCount = true
