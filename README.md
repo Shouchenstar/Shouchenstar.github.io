@@ -69,14 +69,17 @@ git push
 - 仓库 Settings → Pages → Source 必须是 **GitHub Actions**（不是分支发布）
 - 构建由 `.github/workflows/hugo.yml` 完成，无需手动操作
 
-### Cloudflare Workers
+### Cloudflare Pages
 
-- 仓库根目录的 `wrangler.jsonc` 指定了静态资源目录 `./public`
-- Workers 构建配置：
-  - Build command：`curl -sL https://github.com/gohugoio/hugo/releases/download/v0.168.0/hugo_extended_0.168.0_linux-amd64.tar.gz | tar -xz -C /tmp hugo && /tmp/hugo --minify --baseURL https://shouchenstar-github-io.2190298686.workers.dev/`
-  - Deploy command：`npx wrangler deploy`
-- 访问地址：`https://shouchenstar-github-io.2190298686.workers.dev`
-- 注意：`*.workers.dev` 在国内被 DNS 污染，直连打不开，需要绑自定义域名才能稳定访问
+- 项目名：`shouchenstar-github-io`
+- 构建配置：
+  - Framework preset：`None`
+  - Build command：`curl -sL https://github.com/gohugoio/hugo/releases/download/v0.168.0/hugo_extended_0.168.0_linux-amd64.tar.gz | tar -xz -C /tmp hugo && /tmp/hugo --minify`
+  - 注意：不要加 `--baseURL "$CF_PAGES_URL/"`，它返回的是带哈希的部署地址，会把站内链接全部指错。baseURL 统一写在 `hugo.toml` 里
+  - Build output directory：`public`
+- 访问地址：`https://shouchenstar-github-io.pages.dev`
+- 每次 push 到 `main` 自动部署；其他分支会生成预览地址
+- 根目录的 `wrangler.jsonc` 是给 Workers 用的，Pages 不读取，暂时保留
 - 换成自定义域名后，记得把命令里的 `--baseURL` 一起改掉
 
 ## 修改站点信息

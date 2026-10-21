@@ -1,4 +1,4 @@
-baseURL = "https://shouchenstar.github.io/"
+baseURL = "https://shouchenstar-github-io.pages.dev/"
 locale = "zh-cn"
 defaultContentLanguage = "zh"
 title = "潘振"
@@ -31,6 +31,10 @@ summaryLength = 80
   ShowShareButtons = false
   ShowRssButtonInSectionTermList = true
   disableScrollToTop = false
+
+  # 左上角显示的文字（只改显示，不改站点标题）
+  [params.label]
+    text = "首页"
 
   [params.homeInfoParams]
     Title = "你好，我是潘振 👋"
