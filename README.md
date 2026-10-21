@@ -24,9 +24,33 @@ summary: "一句话摘要，显示在列表里"
 ---
 ```
 
-## 新增一条图片（摄影 / UI 设计 / 灵感）
+## 给文章分类
 
-三个图集分区都是「一张图一条目」，每条一个文件夹：
+在文章 front matter 里加 `categories`：
+
+```yaml
+categories: ["论文"]
+```
+
+现在有四个分类：**论文**、**游戏评价**、**灵感**、**日志**。打开「文章」页，标题下面就是分类标签，点进去只显示该分类的文章。
+
+新增一个分类，在 `content/categories/<分类名>/_index.md` 建文件：
+
+```yaml
+---
+title: "分类名"
+description: "一句话说明"
+weight: 50    # 数字越小，标签排得越靠前
+---
+
+{{< category-tabs >}}
+```
+
+之后再在文章里写 `categories: ["分类名"]` 就行。不建这个文件也能用，只是分类页没有说明文字和标签栏。
+
+## 新增一条图片（摄影 / UI 设计）
+
+两个图集分区都是「一张图一条目」，每条一个文件夹：
 
 ```
 content/photography/my-photo/
@@ -73,13 +97,13 @@ hugo --minify
 
 ```
 content/posts/        文章（Markdown）
+content/categories/   文章分类页（论文 / 游戏评价 / 灵感 / 日志）
 content/photography/  摄影图集，一条一个文件夹
 content/design/       UI 设计图集，一条一个文件夹
-content/inspiration/  灵感素材图集，一条一个文件夹
 content/about.md      关于页
 content/search.md     搜索页
-layouts/              图集版式（gallery.html / gallery-item.html）
-assets/css/extended/  图集样式（gallery.css），PaperMod 会自动合并
+layouts/              图集版式（gallery.html / gallery-item.html）与分类标签短代码
+assets/css/extended/  图集和分类标签样式，PaperMod 会自动合并
 static/               图片、_headers 等静态文件
 themes/PaperMod/   主题源码（已内置，勿改，升级时整体替换）
 hugo.toml          站点配置：站名、菜单、个人信息

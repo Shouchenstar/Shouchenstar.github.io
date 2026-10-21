@@ -1,0 +1,15 @@
+{{- $current := .Page }}
+{{- $posts := site.GetPage "/posts" }}
+<nav class="category-tabs" aria-label="文章分类">
+  {{- with $posts }}
+  <a class="category-tab{{ if eq $current.RelPermalink .RelPermalink }} is-active{{ end }}" href="{{ .RelPermalink }}">全部</a>
+  {{- end }}
+  {{- with site.GetPage "/categories" }}
+  {{- range .Pages }}
+  <a class="category-tab{{ if eq $current.RelPermalink .RelPermalink }} is-active{{ end }}" href="{{ .RelPermalink }}">{{ .Title }}</a>
+  {{- end }}
+  {{- end }}
+</nav>
+{{- if and (eq $current.Kind "term") (eq (len $current.RegularPages) 0) }}
+<p class="category-empty">这个分类还没有文章。</p>
+{{- end }}

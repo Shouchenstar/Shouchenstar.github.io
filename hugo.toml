@@ -80,12 +80,6 @@ summaryLength = 80
   weight = 16
 
 [[menus.main]]
-  identifier = "inspiration"
-  name = "灵感"
-  url = "/inspiration/"
-  weight = 17
-
-[[menus.main]]
   identifier = "about"
   name = "关于"
   url = "/about/"
