@@ -12,6 +12,13 @@ summaryLength = 80
 [pagination]
   pagerSize = 10
 
+# 数学公式：让 Goldmark 把 $...$ / $$...$$ 原样交给 KaTeX，不去动里面的 _ * \ 等字符
+[markup.goldmark.extensions.passthrough]
+  enable = true
+  [markup.goldmark.extensions.passthrough.delimiters]
+    block = [['\[', '\]'], ['$$', '$$']]
+    inline = [['\(', '\)'], ['$', '$']]
+
 # 让首页生成 JSON，供站内搜索使用
 [outputs]
   home = ["HTML", "RSS", "JSON"]
@@ -21,6 +28,7 @@ summaryLength = 80
   description = "个人博客 —— 学习笔记、项目实践与日常思考"
   author = "Shouchenstar"
   hideAuthor = true              # 文章元信息行不显示作者名（仍保留在 RSS / SEO 中）
+  math = true                    # 全站加载 KaTeX（$...$ 行内、$$...$$ 独立公式）；单篇可写 math: false 关掉
   defaultTheme = "auto"          # auto / light / dark
   ShowReadingTime = true
   ShowWordCount = true

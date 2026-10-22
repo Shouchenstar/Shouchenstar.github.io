@@ -1,0 +1,12 @@
+/* 文章标题：主题默认 40px 太大，长英文标题会撑满屏幕 */
+.post-title {
+  font-size: 30px;
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .post-title {
+    font-size: 24px;
+  }
+}

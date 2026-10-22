@@ -1,0 +1,8 @@
+{{- /* 文章里用 $...$ / $$...$$ 写公式时加载 KaTeX */ -}}
+{{- $math := site.Params.math | default false -}}
+{{- if isset .Params "math" -}}
+  {{- $math = .Params.math -}}
+{{- end -}}
+{{- if $math -}}
+  {{- partial "math.html" . -}}
+{{- end -}}
