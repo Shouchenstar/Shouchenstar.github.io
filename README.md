@@ -4,14 +4,22 @@
 
 ## 写一篇新文章
 
-```bash
-# 生成草稿（draft: true，本地能看到，线上不会发布）
-hugo new content posts/my-new-post.md
+一篇文章 = 一个文件夹，正文固定叫 `index.md`，图片放同一个文件夹里：
+
+```
+content/posts/my-new-post/
+  index.md      ← 正文
+  image.png     ← 文章里引用的图
 ```
 
-然后编辑 `content/posts/my-new-post.md`，写完把 front matter 里的 `draft` 改成 `false`。
+```bash
+# 生成草稿文件夹（draft: true，本地能看到，线上不会发布）
+hugo new content posts/my-new-post
+```
 
-也可以直接手动新建文件，只要包含这几行：
+Hugo 会套用 `archetypes/posts/index.md` 生成 `content/posts/my-new-post/index.md`。写完把 front matter 里的 `draft` 改成 `false`。
+
+也可以直接手动新建，只要文件夹里有 `index.md` 并包含这几行：
 
 ```yaml
 ---
@@ -23,6 +31,16 @@ categories: ["分类"]
 summary: "一句话摘要，显示在列表里"
 ---
 ```
+
+正文里引用图片直接写文件名，不用写路径（`./` 也行）：
+
+```markdown
+![图注](image.png)
+```
+
+- 文件夹名就是网址：`content/posts/my-new-post/` → `/posts/my-new-post/`，用英文或数字，别用中文和空格
+- 图片必须和 `index.md` 放在同一层；放进子文件夹需要写相对路径（如 `img/image.png`）
+- 图片只在这个文件夹里找，不会跑到别的文章里去，删文章时整块删除即可
 
 ## 给文章分类
 
@@ -113,7 +131,8 @@ hugo --minify
 ## 目录说明
 
 ```
-content/posts/        文章（Markdown）
+content/posts/        文章，一篇一个文件夹（index.md + 配图）
+archetypes/posts/     新建文章文件夹时套用的模板
 content/categories/   文章分类页（论文 / 游戏评价 / 灵感 / 日志）
 content/gallery/      图片栏目：photography/ 摄影、design/ UI 设计
 content/about.md      关于页
