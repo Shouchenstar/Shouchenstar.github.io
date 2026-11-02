@@ -1,5 +1,5 @@
 ---
-title: "DiffRect: Latent Diffusion Label Rectification for  Semi-supervised Medical Image Segmentation"
+title: "MICCAI'24 DiffRect: Latent Diffusion Label Rectification for  Semi-supervised Medical Image Segmentation"
 date: 2026-10-22
 draft: false
 tags: ["医学图像处理", "半监督学习", "图像分割"]
