@@ -7,7 +7,7 @@ categories: ["论文"]
 summary: "图像生成：Mean Flow"
 ---
 
-# 背景：Flow matching
+## 背景：Flow matching
 有个直观的想法就是：我们可以考虑噪声的初始高维状态是一个二维平面上的点，同时这个平面内是一个关于时间的速度场，我们只要将这个点按照这个速度场的方向去移动就可以得到真实世界的图像分布。
 
 基于这个动机，对于初始状态$x_0 \sim p_{data}$，不妨考虑加噪后的目标是$x_1 \sim  \mathcal{N}(0,I)$。
@@ -28,10 +28,10 @@ $$
 
 基于此，Mean Flow 利用平均速度的思想，达到了一步生成图像的目的。
 
-# MeanFlow 数学推导
+## MeanFlow 数学推导
 
 
-## 1. 平均速度的定义
+### 1. 平均速度的定义
 
 对 \(0\le r<t\le 1\)，定义从 \(r\) 到 \(t\) 的平均速度
 
@@ -42,44 +42,44 @@ u(z_t,r,t)=\frac{1}{t-r}\int_r^t v^*(z_s,s)\,ds,
 
 $z_t$是当前位置。
 
-## 2. MeanFlow 恒等式
+### 2. MeanFlow 恒等式
 
 令
 
-\[
+$$
 F(t)=\int_r^t v^*(z_s,s)\,ds.
-\]
+$$
 
 根据平均速度的定义，
 
-\[
+$$
 F(t)=(t-r)u(z_t,r,t).
-\]
+$$
 
 对 \(t\) 求导。
 
 
-\[
+$$
 \frac{dF}{dt}
 =
 u(z_t,r,t)
 +
 (t-r)\frac{d}{dt}u(z_t,r,t).
-\]
+$$
 
 因此
 
-\[
+$$
 v^*(z_t,t)
 =
 u(z_t,r,t)
 +
 (t-r)\frac{d}{dt}u(z_t,r,t).
-\]
+$$
 
 移项得到 MeanFlow 恒等式：
 
-\[
+$$
 \boxed{
 u(z_t,r,t)
 =
@@ -87,25 +87,25 @@ v^*(z_t,t)
 -
 (t-r)\frac{d}{dt}u(z_t,r,t)
 }
-\]
+$$
 
 
-## 3. 全导数的展开
+### 3. 全导数的展开
 
 根据链式法则，
 
-\[
+$$
 \frac{d}{dt}u(z_t,r,t)
 =
 \partial_t u(z_t,r,t)
 +
 \left(\frac{dz_t}{dt}\right)^\top
 \nabla_x u(z_t,r,t).
-\]
+$$
 
 又因为 \(\frac{dz_t}{dt}=v^*(z_t,t)\)，所以
 
-\[
+$$
 \boxed{
 \frac{d}{dt}u(z_t,r,t)
 =
@@ -114,14 +114,14 @@ v^*(z_t,t)
 v^*(z_t,t)^\top
 \nabla_x u(z_t,r,t)
 }
-\]
+$$
 
 
-## 4. 训练目标
+### 4. 训练目标
 
 实际训练时用条件速度 \(v=x_1-x_0\) 作为边缘速度的采样估计。设网络输出为 \(u_\theta(x,r,t)\)，恒等式残差为
 
-\[
+$$
 R_\theta
 =
 u_\theta(x_t,r,t)
@@ -129,11 +129,11 @@ u_\theta(x_t,r,t)
 (x_1-x_0)
 +
 (t-r)\frac{d}{dt}u_\theta(x_t,r,t).
-\]
+$$
 
 如果直接最小化 \(\|R_\theta\|^2\)，梯度会穿过 JVP 项。实际实现中通常对恒等式右侧使用 stop-gradient，把右侧作为回归目标：
 
-\[
+$$
 \boxed{
 \mathcal L_{\mathrm{MF}}
 =
@@ -151,7 +151,7 @@ u_\theta(x_t,r,t)
 \right\|^2
 \right]
 }
-\]
+$$
 
 其中 \(\operatorname{sg}(\cdot)\) 表示停止梯度。
 
@@ -165,21 +165,21 @@ target = (v - (t - r) * dudt).detach()
 loss = ((u - target) ** 2).mean()
 ```
 
-## 5. 一步采样
+### 5. 一步采样
 
 由位移关系
 
-\[
+$$
 x_1-x_0=u(x_1,0,1).
-\]
+$$
 
 因此从噪声 \(x_1\) 出发，一步生成数据为
 
-\[
+$$
 \boxed{
 \hat x_0=x_1-u_\theta(x_1,0,1)
 }
-\]
+$$
 
 这就是 MeanFlow 的 one-step generation，只需要一次网络前向。
 
