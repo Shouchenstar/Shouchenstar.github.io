@@ -12,7 +12,7 @@ summary: "图像生成：Mean Flow"
 
 基于这个动机，对于初始状态$x_0 \sim p_{data}$，不妨考虑加噪后的目标是$x_1 \sim  \mathcal{N}(0,I)$。
 
-考虑$x0$到$x1$的路径上存在一个经过时间$t$采样的$x_t$:
+考虑$x_0$到$x_1$的路径上存在一个经过时间$t$采样的$x_t$:
 
 $$
 x_t = t \cdot x_1 + (1 - t) \cdot x_0
@@ -33,7 +33,7 @@ $$
 
 ### 1. 平均速度的定义
 
-对 \(0\le r<t\le 1\)，定义从 \(r\) 到 \(t\) 的平均速度
+对 \(0\le r\lt t\le 1\)，定义从 \(r\) 到 \(t\) 的平均速度
 
 \[
 u(z_t,r,t)=\frac{1}{t-r}\int_r^t v^*(z_s,s)\,ds,
@@ -60,33 +60,27 @@ $$
 
 
 $$
+\begin{aligned}
 \frac{dF}{dt}
-=
-u(z_t,r,t)
-+
-(t-r)\frac{d}{dt}u(z_t,r,t).
+&= u(z_t,r,t) \\
+&\quad + (t-r)\frac{d}{dt}u(z_t,r,t).
+\end{aligned}
 $$
 
 因此
 
 $$
+\begin{aligned}
 v^*(z_t,t)
-=
-u(z_t,r,t)
-+
-(t-r)\frac{d}{dt}u(z_t,r,t).
+&= u(z_t,r,t) \\
+&\quad + (t-r)\frac{d}{dt}u(z_t,r,t).
+\end{aligned}
 $$
 
 移项得到 MeanFlow 恒等式：
 
 $$
-\boxed{
-u(z_t,r,t)
-=
-v^*(z_t,t)
--
-(t-r)\frac{d}{dt}u(z_t,r,t)
-}
+\boxed{ u(z_t,r,t) = v^*(z_t,t) - (t-r)\frac{d}{dt}u(z_t,r,t) }
 $$
 
 
@@ -95,25 +89,17 @@ $$
 根据链式法则，
 
 $$
+\begin{aligned}
 \frac{d}{dt}u(z_t,r,t)
-=
-\partial_t u(z_t,r,t)
-+
-\left(\frac{dz_t}{dt}\right)^\top
-\nabla_x u(z_t,r,t).
+&= \partial_t u(z_t,r,t) \\
+&\quad + \left(\frac{dz_t}{dt}\right)^\top \nabla_x u(z_t,r,t).
+\end{aligned}
 $$
 
 又因为 \(\frac{dz_t}{dt}=v^*(z_t,t)\)，所以
 
 $$
-\boxed{
-\frac{d}{dt}u(z_t,r,t)
-=
-\partial_t u(z_t,r,t)
-+
-v^*(z_t,t)^\top
-\nabla_x u(z_t,r,t)
-}
+\boxed{ \frac{d}{dt}u(z_t,r,t) = \partial_t u(z_t,r,t) + v^*(z_t,t)^\top \nabla_x u(z_t,r,t) }
 $$
 
 
@@ -122,34 +108,14 @@ $$
 实际训练时用条件速度 \(v=x_1-x_0\) 作为边缘速度的采样估计。设网络输出为 \(u_\theta(x,r,t)\)，恒等式残差为
 
 $$
-R_\theta
-=
-u_\theta(x_t,r,t)
--
-(x_1-x_0)
-+
-(t-r)\frac{d}{dt}u_\theta(x_t,r,t).
+R_\theta = u_\theta(x_t,r,t) - (x_1-x_0) + (t-r)\frac{d}{dt}u_\theta(x_t,r,t).
 $$
 
 如果直接最小化 \(\|R_\theta\|^2\)，梯度会穿过 JVP 项。实际实现中通常对恒等式右侧使用 stop-gradient，把右侧作为回归目标：
 
 $$
 \boxed{
-\mathcal L_{\mathrm{MF}}
-=
-\mathbb E
-\left[
-\left\|
-u_\theta(x_t,r,t)
--
-\operatorname{sg}
-\left(
-(x_1-x_0)
--
-(t-r)\frac{d}{dt}u_\theta(x_t,r,t)
-\right)
-\right\|^2
-\right]
+\mathcal L_{\mathrm{MF}} = \mathbb E \left[ \left\| u_\theta(x_t,r,t) - \operatorname{sg}\left( (x_1-x_0) - (t-r)\frac{d}{dt}u_\theta(x_t,r,t) \right) \right\|^2 \right]
 }
 $$
 
@@ -176,9 +142,7 @@ $$
 因此从噪声 \(x_1\) 出发，一步生成数据为
 
 $$
-\boxed{
-\hat x_0=x_1-u_\theta(x_1,0,1)
-}
+\boxed{ \hat x_0=x_1-u_\theta(x_1,0,1) }
 $$
 
 这就是 MeanFlow 的 one-step generation，只需要一次网络前向。
