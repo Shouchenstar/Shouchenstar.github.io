@@ -1,6 +1,6 @@
 ---
 title: "浅谈NeurIPS'25 一步生成模型：Mean Flow"
-date: 2026-10-27
+date: 2026-11-2
 draft: false
 tags: ["图像生成", "Flow matching", "Mean Flow"]
 categories: ["论文"]
