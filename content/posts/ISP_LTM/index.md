@@ -4,7 +4,7 @@ date: 2026-11-09
 draft: false
 tags: ["图像处理器", "ISP", "LTM"]
 categories: ["图像处理器"]
-summary: "图像处理器LTM Cmodel学习"
+summary: "图像处理器LTM原理学习"
 ---
 
 ## 为什么需要局部色调映射（LTM）
