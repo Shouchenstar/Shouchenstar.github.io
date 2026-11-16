@@ -38,13 +38,11 @@ $$
 
 ## 中国剩余定理
 $$
-
 \begin{cases}
 x\equiv a\pmod m\\
 x\equiv b\pmod n
 \end{cases}
 \quad\text{且}\quad \gcd(m,n)=1
-
 $$
 
 那么这个方程组在模 $mn$ 的意义下$x$有唯一解。
