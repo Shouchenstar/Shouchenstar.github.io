@@ -1,6 +1,6 @@
 ---
 title: "数论"
-date: 2026-11-02
+date: 2026-11-16
 draft: false
 tags: ["数论", "数学"]
 categories: ["日志"]
