@@ -81,31 +81,15 @@ $$
 
 - 超过上限 $K_j > K_{\max}$：
 
-$$
-C_{\text{out}}
-=
-G_j + \frac{K_{\max}\cdot coef1}{1024}
-$$
+$$C_{\text{out}} = G_j + \frac{K_{\max}\cdot coef1}{1024}$$
 
 - 低于下限 $K_j < K_{\min}$：
 
-$$
-C_{\text{out}}
-=
-G_j + \frac{K_{\min}\cdot coef1}{1024}
-$$
+$$C_{\text{out}} = G_j + \frac{K_{\min}\cdot coef1}{1024}$$
 
 - 在区间内 $K_{\min} \le K_j \le K_{\max}$：
 
-$$
-C_{\text{out}}
-=
-G_j
-+
-\frac{coef2\cdot(K_{\max}+K_{\min})}{2048}
-+
-\frac{K_j\cdot coef3}{1024}
-$$
+$$C_{\text{out}} = G_j + \frac{coef2\cdot(K_{\max}+K_{\min})}{2048} + \frac{K_j\cdot coef3}{1024}$$
 
 最后裁剪到 $[0,255]$。
 
