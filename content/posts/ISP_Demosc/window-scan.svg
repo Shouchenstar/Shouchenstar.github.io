@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 520" role="img" aria-labelledby="title desc">
+  <title id="title">9×9 RAW 窗口中选取 7×7 区域并标出 3×3 绿色位置</title>
+  <desc id="desc">九乘九网格中，左上角七乘七区域以淡粉色突出显示；其正中三乘三区域为绿色，其中左上角的一个单元格用红色标出。</desc>
+  <rect width="880" height="520" fill="#fff"/>
+
+  <!-- 9×9 grid: origin (43, 47), cell size 89×49. -->
+  <rect x="43" y="47" width="801" height="441" fill="#f1f8fa"/>
+  <!-- Upper-left 7×7 scanning window. -->
+  <rect x="43" y="47" width="623" height="343" fill="#e8caca"/>
+  <!-- The nine candidate positions in the center of that window. -->
+  <rect x="310" y="194" width="267" height="147" fill="#9ca844"/>
+  <!-- One selected candidate, at row 3 / column 3 of the 9×9 grid. -->
+  <rect x="310" y="194" width="89" height="49" fill="#cc0000"/>
+
+  <!-- Grid lines coincide with all color-region boundaries. -->
+  <path d="M43 47V488 M132 47V488 M221 47V488 M310 47V488 M399 47V488 M488 47V488 M577 47V488 M666 47V488 M755 47V488 M844 47V488 M43 47H844 M43 96H844 M43 145H844 M43 194H844 M43 243H844 M43 292H844 M43 341H844 M43 390H844 M43 439H844 M43 488H844" fill="none" stroke="#a8d5da" stroke-width="1.5"/>
+  <rect x="43" y="47" width="623" height="343" fill="none" stroke="#859a9e" stroke-width="2"/>
+</svg>
