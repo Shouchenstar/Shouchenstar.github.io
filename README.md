@@ -53,7 +53,7 @@ summary: "一句话摘要，显示在列表里"
 ```
 
 - 也支持 `\(...\)` 和 `\[...\]`
-- 公式在浏览器里渲染（KaTeX 文件在 `static/katex/`，不依赖外部 CDN）
+- 公式在 Hugo 构建时通过 `layouts/_markup/render-passthrough.html` 渲染，浏览器只加载本地 `static/katex/` 中的样式；`\[...\]` 和 `$$...$$` 都可以跨多行书写。公式语法有误会使构建报错，并指出文章中的位置。
 - 单篇文章不想要可以加 `math: false`；想改成默认不加载，把 `hugo.toml` 里 `[params]` 的 `math` 改成 `false`，再在需要的文章 front matter 里写 `math: true`
 - 反引号包起来的代码里的 `$` 不会被当成公式
 

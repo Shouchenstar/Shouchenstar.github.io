@@ -1,0 +1,9 @@
+{{- /* Goldmark 已识别 $...$、$$...$$、\(...\)、\[...\]，直接在构建时渲染整个公式；不让 Markdown/浏览器拆开多行公式。 */ -}}
+{{- $opts := dict "output" "htmlAndMathml" "displayMode" (eq .Type "block") -}}
+{{- with try (transform.ToMath .Inner $opts) -}}
+  {{- with .Err -}}
+    {{- errorf "数学公式渲染失败：%s（%s）" . $.Position -}}
+  {{- else -}}
+    {{- .Value -}}
+  {{- end -}}
+{{- end -}}

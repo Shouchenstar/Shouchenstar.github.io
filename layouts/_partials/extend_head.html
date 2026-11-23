@@ -1,4 +1,4 @@
-{{- /* 文章里用 $...$ / $$...$$ 写公式时加载 KaTeX */ -}}
+{{- /* 公式由 Hugo 构建时渲染，这里只加载 KaTeX 样式。 */ -}}
 {{- $math := site.Params.math | default false -}}
 {{- if isset .Params "math" -}}
   {{- $math = .Params.math -}}
