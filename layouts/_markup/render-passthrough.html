@@ -1,6 +1,6 @@
 {{- /* Goldmark 已识别 $...$、$$...$$、\(...\)、\[...\]，直接在构建时渲染整个公式；不让 Markdown/浏览器拆开多行公式。 */ -}}
-{{- /* 使用 Hugo 原生 MathML，避免构建时 KaTeX 与静态 KaTeX CSS 版本不一致导致上下标比例异常。 */ -}}
-{{- $opts := dict "output" "mathml" "displayMode" (eq .Type "block") "strict" "ignore" -}}
+{{- /* 只输出 KaTeX HTML：横线、上下标与分式均由配套 CSS 绘制，避免浏览器原生 MathML 的兼容性问题。 */ -}}
+{{- $opts := dict "output" "html" "displayMode" (eq .Type "block") "strict" "ignore" -}}
 {{- with try (transform.ToMath .Inner $opts) -}}
   {{- with .Err -}}
     {{- errorf "数学公式渲染失败：%s（%s）" . $.Position -}}
